@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>🍻 Bar do Dev</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: linear-gradient(270deg, #111, #1a1a1a, #000);
+  background-size: 600% 600%;
+  animation: bg 10s infinite;
+  color: white;
+  text-align: center;
+}
+
+@keyframes bg {
+  0% {background-position: 0%;}
+  50% {background-position: 100%;}
+  100% {background-position: 0%;}
+}
+
+h1 {
+  margin-top: 20px;
+  font-size: 40px;
+}
+
+#tela {
+  margin: 30px;
+  font-size: 28px;
+  min-height: 120px;
+  transition: 0.3s;
+}
+
+button {
+  margin: 8px;
+  padding: 12px 18px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+.bebida { background: orange; }
+.fumar { background: gray; }
+.extra { background: purple; color: white; }
+
+.efeito {
+  animation: pulse 0.5s infinite alternate;
+}
+
+@keyframes pulse {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>🍻 BAR DO DEV 🔥</h1>
+
+<div id="tela">Escolha sua vibe 👇</div>
+
+<div id="menu">
+
+<h3>🍻 Bebidas</h3>
+<button class="bebida" onclick="escolher('cerveja')">🍺 Cerveja</button>
+<button class="bebida" onclick="escolher('vodka')">🥶 Vodka</button>
+<button class="bebida" onclick="escolher('whisky')">🥃 Whisky</button>
+<button class="bebida" onclick="escolher('cachaca')">💀 Cachaça</button>
+
+<h3>🚬 Área de Fumar</h3>
+<button class="fumar" onclick="escolher('cigarro')">🚬 Cigarro</button>
+<button class="fumar" onclick="escolher('vape')">🌫️ Vape</button>
+<button class="fumar" onclick="escolher('pod')">💨 Pod</button>
+<button class="fumar" onclick="escolher('paieiro')">🔥 Paieiro</button>
+
+<h3>🎮 Extras</h3>
+<button class="extra" onclick="escolher('surpresa')">🎁 Surpresa</button>
+<button class="extra" onclick="escolher('dica')">💡 Dica</button>
+
+</div>
+
+<br>
+<button onclick="voltar()">🔙 Voltar</button>
+
+<script>
+function animar(frames, tempo = 400) {
+  return new Promise(resolve => {
+    let i = 0;
+    const tela = document.getElementById("tela");
+
+    const intervalo = setInterval(() => {
+      tela.innerHTML = frames[i];
+      tela.classList.add("efeito");
+      i++;
+
+      if (i >= frames.length) {
+        clearInterval(intervalo);
+        tela.classList.remove("efeito");
+        resolve();
+      }
+    }, tempo);
+  });
+}
+
+async function escolher(tipo) {
+  document.getElementById("menu").style.display = "none";
+
+  switch (tipo) {
+
+    case 'cerveja':
+      await animar(["🍺", "🍺🍺 enchendo...", "🍺🍺🍺 espuma subindo...", "🍻 Saúde!"]);
+      tela.innerHTML += "<br>💡 Dica: hidrata depois 😂";
+      break;
+
+    case 'vodka':
+      await animar(["🥶...", "❄️ gelo...", "🔥 queimando...", "💀 caiu forte"]);
+      tela.innerHTML += "<br>💡 Dica: isso não perdoa 😬";
+      break;
+
+    case 'whisky':
+      await animar(["🥃 girando...", "🧐 analisando...", "😌 saboreando...", "🎩 classe total"]);
+      tela.innerHTML += "<br>💡 Dica: vai devagar, patrão";
+      break;
+
+    case 'cachaca':
+      await animar(["💀...", "🔥 descendo...", "😵 tremedeira...", "🪦 RIP 😂"]);
+      tela.innerHTML += "<br>💡 Dica: isso aqui é guerra";
+      break;
+
+    case 'cigarro':
+      await animar(["🚬 acendendo...", "💨 fumaça...", "💨💨...", "😖 gosto ruim"]);
+      tela.innerHTML += "<br>💡 Dica: isso aí... melhor nem 😬";
+      break;
+
+    case 'vape':
+      await animar(["🌫️ soltando...", "☁️☁️☁️", "😮‍💨 vibe...", "👻 sumiu"]);
+      tela.innerHTML += "<br>💡 Dica: engana fácil";
+      break;
+
+    case 'pod':
+      await animar(["💨 puff...", "💨💨...", "😎 modinha...", "🤔 estranho"]);
+      tela.innerHTML += "<br>💡 Dica: cuidado com vício";
+      break;
+
+    case 'paieiro':
+      await animar(["🔥...", "💨 forte...", "😤 raiz...", "💀 pesado"]);
+      tela.innerHTML += "<br>💡 Dica: isso é hardcore";
+      break;
+
+    case 'surpresa':
+      await animar(["🎁 abrindo...", "😳...", "😂 perdeu tudo"]);
+      break;
+
+    case 'dica':
+      let dicas = [
+        "💡 Beba com moderação 🍻",
+        "💡 Água salva vidas 💧",
+        "💡 Não dirige 🚗❌",
+        "💡 Dorme depois 😂"
+      ];
+      await animar([dicas[Math.floor(Math.random() * dicas.length)]]);
+      break;
+  }
+}
+
+function voltar() {
+  document.getElementById("menu").style.display = "block";
+  document.getElementById("tela").innerHTML = "Escolha outra opção 👇";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<script>
+let opcao;
+
+do {
+  opcao = Number(prompt(
+    "🍻 MENU DO BAR 🍻\n\n" +
+    "1 - Cerveja 🍺\n" +
+    "2 - Vodka 🥶\n" +
+    "3 - Whisky 🥃\n" +
+    "4 - Cachaça 💀\n" +
+    "5 - Combo Surpresa 🎁\n" +
+    "0 - Sair ❌\n\n" +
+    "Escolha uma opção:"
+  ));
+
+  switch (opcao) {
+    case 1:
+      alert("🍺 Cerveja gelada saindo! Boa escolha!");
+      break;
+
+    case 2:
+      alert("🥶 Vodka pura! Coragem em dia hein!");
+      break;
+
+    case 3:
+      alert("🥃 Whisky selecionado! Classe total!");
+      break;
+
+    case 4:
+      alert("💀 Cachaça raiz! Segura firme!");
+      break;
+
+    case 5:
+      let sorteio = Math.floor(Math.random() * 4) + 1;
+
+      switch (sorteio) {
+        case 1:
+          alert("🎁 Combo Surpresa: Cerveja 🍺");
+          break;
+        case 2:
+          alert("🎁 Combo Surpresa: Vodka 🥶");
+          break;
+        case 3:
+          alert("🎁 Combo Surpresa: Whisky 🥃");
+          break;
+        case 4:
+          alert("🎁 Combo Surpresa: Cachaça 💀");
+          break;
+      }
+      break;
+
+    case 0:
+      alert("👋 Valeu! Volte sempre!");
+      break;
+
+    default:
+      alert("❌ Opção inválida! Tenta de novo.");
+  }
+
+} while (opcao !== 0);
+</script>
+
+</body>
+</html>

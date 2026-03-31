@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<body style="text-align:center; font-size:30px;">
+
+<h1>🍻 BAR DO DEV 🍻</h1>
+
+<div id="tela">Escolha uma bebida abaixo 👇</div>
+
+<br>
+
+<div id="menu">
+  <button onclick="escolher(1)">🍺 Cerveja</button>
+  <button onclick="escolher(2)">🥶 Vodka</button>
+  <button onclick="escolher(3)">🥃 Whisky</button>
+  <button onclick="escolher(4)">💀 Cachaça</button>
+  <button onclick="escolher(5)">🎁 Surpresa</button>
+</div>
+
+<br>
+
+<button id="voltar" onclick="mostrarMenu()" style="display:none;">
+  🔙 Voltar ao Menu
+</button>
+
+<script>
+function animar(frames, tempo = 500) {
+  return new Promise((resolve) => {
+    let i = 0;
+    const tela = document.getElementById("tela");
+
+    const intervalo = setInterval(() => {
+      tela.innerHTML = frames[i];
+      i++;
+
+      if (i >= frames.length) {
+        clearInterval(intervalo);
+        resolve();
+      }
+    }, tempo);
+  });
+}
+
+async function escolher(opcao) {
+  document.getElementById("menu").style.display = "none";
+
+  switch (opcao) {
+    case 1:
+      await animar(["🍺...", "😎 Pegou!", "🍻 Saúde!"]);
+      break;
+
+    case 2:
+      await animar(["🥶...", "🔥 Forte!", "💀 RIP 😂"]);
+      break;
+
+    case 3:
+      await animar(["🥃...", "😌 Classe...", "🎩 Elegante!"]);
+      break;
+
+    case 4:
+      await animar(["💀...", "😵...", "🪦 Fim 😂"]);
+      break;
+
+    case 5:
+      let sorteio = Math.floor(Math.random() * 4) + 1;
+      await animar(["🎁 Abrindo..."]);
+      if (sorteio === 1) await animar(["🍺 Surpresa!", "🍻"]);
+      if (sorteio === 2) await animar(["🥶 Surpresa!", "🔥"]);
+      if (sorteio === 3) await animar(["🥃 Surpresa!", "🎩"]);
+      if (sorteio === 4) await animar(["💀 Surpresa!", "🪦"]);
+      break;
+  }
+
+  document.getElementById("voltar").style.display = "inline";
+}
+
+function mostrarMenu() {
+  document.getElementById("menu").style.display = "block";
+  document.getElementById("voltar").style.display = "none";
+  document.getElementById("tela").innerHTML = "Escolha outra bebida 👇";
+}
+</script>
+
+</body>
+</html>
